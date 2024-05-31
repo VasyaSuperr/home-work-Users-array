@@ -91,3 +91,11 @@ users.sort(function (a, b) {
   return a.age - b.age;
 });
 console.log("Sortered users: ", users);
+
+console.log("Task 9");
+const userExists = users.some((user) => user.email === "useremail7@gmail.com");
+console.log("User with email useremail7@gmail.com exists: ", userExists);
+
+console.log("Task 10");
+const checkSubscribedAllUsers = users.every((user) => user.isSubscribed);
+console.log("All users are subscribed: ", checkSubscribedAllUsers);
