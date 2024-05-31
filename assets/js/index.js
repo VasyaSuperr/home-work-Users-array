@@ -1,4 +1,5 @@
-function User(name, surname, age, isMale, email, isSubscribed) {
+function User(id, name, surname, age, isMale, email, isSubscribed) {
+  this.id = id;
   this.firstName = name;
   this.lastName = surname;
   this.age = age;
@@ -11,10 +12,15 @@ User.prototype.getFullName = function () {
   return `${this.firstName} ${this.lastName}`;
 };
 
+User.prototype.updateEmail = function (newEmail) {
+  this.email = newEmail;
+};
+
 const users = [];
 
 for (let i = 0; i < 10; i++) {
   const user = new User(
+    i,
     `Username${i}`,
     `Usersurname${i}`,
     Math.floor(Math.random() * 90),
@@ -50,8 +56,38 @@ const indexOfDeleted = users.findIndex(
 );
 
 if (indexOfDeleted !== -1) {
-  users.slice(indexOfDeleted, 1);
+  users.splice(indexOfDeleted, 1);
   console.log(`User with useremail${indexOfDeleted}@gmail.com was deleted`);
 } else {
   console.log(`User with useremail${indexOfDeleted}@gmail.com doesn't exist`);
 }
+console.log(users);
+
+console.log("Task 5");
+const indexOfChange = users.findIndex((user) => user.id === 2);
+
+if (indexOfChange !== -1) {
+  users[indexOfChange].updateEmail("user@gmail.com");
+  console.log(`User with index ${indexOfChange} was changed`);
+} else {
+  console.log(`User with index ${indexOfChange} doesn't exist`);
+}
+console.log(users);
+
+console.log("Task 6");
+const subscribedUsers = users.filter((user) => user.isSubscribed);
+const percentageSubscribed = (subscribedUsers.length / users.length) * 100;
+
+console.log(`Percentage subscribed = ${Math.round(percentageSubscribed)}%`);
+
+console.log("Task 7");
+const totalAge = users.reduce((sum, user) => sum + user.age, 0);
+const averageAge = totalAge / users.length;
+
+console.log("Average age users = ", Math.round(averageAge));
+
+console.log("Task 8");
+users.sort(function (a, b) {
+  return a.age - b.age;
+});
+console.log("Sortered users: ", users);
